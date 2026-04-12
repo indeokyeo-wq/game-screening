@@ -81,9 +81,16 @@ body{background:var(--bg);color:var(--text);font-family:'Apple SD Gothic Neo','N
 /* Detail */
 .detail{display:none;border-top:1px solid var(--border);margin-top:14px;padding-top:14px}
 .detail.open{display:block}
-.detail-inner{display:flex;gap:14px;align-items:flex-start}
-.detail-fin{flex:1;min-width:0}
-.detail-comment{flex:1;min-width:0}
+/* Tabs */
+.tab-nav{display:flex;gap:5px;margin-top:12px;margin-bottom:8px}
+.tab-btn{flex:1;padding:5px 2px;font-size:9px;font-weight:700;letter-spacing:0.3px;border:1px solid var(--border);border-radius:6px;background:transparent;color:var(--muted);cursor:pointer;transition:all .15s}
+.tab-btn:hover{border-color:var(--gold);color:var(--gold)}
+.tab-btn.active{background:var(--gold);border-color:var(--gold);color:#000}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+.tab-line{font-size:11px;color:var(--muted);line-height:1.6;padding:5px 0;border-bottom:1px solid #1a1a2e}
+.tab-line:last-child{border-bottom:none}
+.tab-line b{color:var(--text)}
 
 .dblock{margin-bottom:20px}
 .dblock h4{font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--gold);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
@@ -158,8 +165,8 @@ footer span{color:var(--gold)}
 .mini-game{display:flex;align-items:center;gap:8px}
 .mini-icon{width:28px;height:28px;border-radius:6px;object-fit:cover;flex-shrink:0;border:1px solid var(--border)}
 
-/* Comment block */
-.comment-block{padding:10px 12px;background:#0a0a14;border:1px solid var(--border);border-radius:8px;height:100%;box-sizing:border-box}
+/* Comment block (legacy - kept for safety) */
+.comment-block{padding:10px 12px;background:#0a0a14;border:1px solid var(--border);border-radius:8px}
 .comment-line{font-size:11px;color:var(--muted);line-height:1.6;padding:4px 0;border-bottom:1px solid #1a1a2e}
 .comment-line:last-child{border-bottom:none}
 
@@ -3751,7 +3758,7 @@ function krw(s) {
       `약 ${fmtKrw(parseFloat(a.replace(/,/g,''))*1e4)} ~ ${fmtKrw(parseFloat(b.replace(/,/g,''))*1e4)}`)
     .replace(/\$([0-9,]+(?:\.[0-9]+)?)만/g, (_,n) => fmtKrw(parseFloat(n.replace(/,/g,''))*1e4))
     .replace(/\$([0-9.]+)M\b/g, (_,n) => fmtKrw(parseFloat(n)*1e6))
-    .replace(/\$([0-9.]+)\/MAU·월/g, (_,n) => `₩${Math.round(parseFloat(n)*USD_KRW)}/MAU·월`);
+    .replace(/\$([0-9.]+)\/MAU·월/g, (_,n) => `₩${Math.round(parseFloat(n)*USD_KRW)}`);
 }
 function parseRevUsd(s) {
   if (!s) return 0;
@@ -3806,25 +3813,38 @@ function renderCard(g, rank) {
   <div class="mau">추정 MAU <b>${g.mau}</b></div>
   <div class="bars">${barsHtml}</div>
   <div class="detail" id="detail-${g.id}">
-    <div class="detail-inner">
-      <div class="detail-fin">
-        <div class="fin-block">
-          <h4>💰 재무 추정</h4>
-          <div class="fin-company">🏢 ${f.headnote||''}</div>
-          <div class="fin-grid">
-            <div class="fin-item"><div class="fin-item-lbl">MAU</div><div class="fin-item-val">${f.mauBase||''}</div><div class="fin-item-sub">${f.arpmauNote||''}</div></div>
-            <div class="fin-item"><div class="fin-item-lbl">ARPMAU</div><div class="fin-item-val blue">${krw(f.arpmau)||''}</div></div>
-            <div class="fin-item"><div class="fin-item-lbl">월 매출</div><div class="fin-item-val blue">${krw(f.revMonth)||''}</div></div>
-            <div class="fin-item"><div class="fin-item-lbl">연 매출</div><div class="fin-item-val gold">${krw(f.revYear)||''}</div></div>
-            <div class="fin-item"><div class="fin-item-lbl">영업이익</div><div class="fin-item-val" style="color:${opClr}">${krw(f.opProfitYear)||''}</div><div class="fin-item-sub">${f.opMargin||''}</div></div>
-            <div class="fin-item"><div class="fin-item-lbl">인원</div><div class="fin-item-val">${f.headcount||''}</div></div>
-          </div>
-          <div class="fin-basis">📎 ${f.basis||''}</div>
-        </div>
+    <div class="fin-block">
+      <h4>💰 재무 추정</h4>
+      <div class="fin-company">🏢 ${f.headnote||''}</div>
+      <div class="fin-grid">
+        <div class="fin-item"><div class="fin-item-lbl">MAU 기준</div><div class="fin-item-val">${f.mauBase||''}</div></div>
+        <div class="fin-item"><div class="fin-item-lbl">ARPMAU</div><div class="fin-item-val blue">${krw(f.arpmau)||''}</div><div class="fin-item-sub">${f.arpmauNote||''}</div></div>
+        <div class="fin-item"><div class="fin-item-lbl">월 추정 매출</div><div class="fin-item-val blue">${krw(f.revMonth)||''}</div></div>
+        <div class="fin-item"><div class="fin-item-lbl">연 추정 매출</div><div class="fin-item-val gold">${krw(f.revYear)||''}</div></div>
+        <div class="fin-item"><div class="fin-item-lbl">영업이익/연</div><div class="fin-item-val" style="color:${opClr}">${krw(f.opProfitYear)||''}</div><div class="fin-item-sub">${f.opMargin||''}</div></div>
+        <div class="fin-item"><div class="fin-item-lbl">인원</div><div class="fin-item-val">${f.headcount||''}</div></div>
       </div>
-      <div class="detail-comment">
-        <div class="comment-block">${commentHtml}</div>
-      </div>
+      <div class="fin-basis">📎 ${f.basis||''}</div>
+    </div>
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="switchTab('${g.id}','ip',this)">IP 규모</button>
+      <button class="tab-btn" onclick="switchTab('${g.id}','strength',this)">강점</button>
+      <button class="tab-btn" onclick="switchTab('${g.id}','risk',this)">리스크</button>
+      <button class="tab-btn" onclick="switchTab('${g.id}','ad',this)">광고 수익</button>
+    </div>
+    <div class="tab-panel active" data-tab="ip">
+      <div class="tab-line">📊 추정 MAU <b>${g.mau||'-'}</b></div>
+      <div class="tab-line">💬 ${g.summary||'-'}</div>
+    </div>
+    <div class="tab-panel" data-tab="strength">
+      ${(g.strengths||[]).map(s=>`<div class="tab-line">💪 ${s}</div>`).join('')}
+    </div>
+    <div class="tab-panel" data-tab="risk">
+      ${(g.risks||[]).map(r=>`<div class="tab-line">⚠️ ${r}</div>`).join('')}
+    </div>
+    <div class="tab-panel" data-tab="ad">
+      <div class="tab-line">📡 ${g.adLabel||'-'}</div>
+      ${g.payment?`<div class="tab-line">${g.payment}</div>`:''}
     </div>
     <div class="close-row" onclick="event.stopPropagation();toggleDetail('${g.id}')">▲ 닫기</div>
   </div>
@@ -3850,6 +3870,16 @@ function render() {
     if (el) el.classList.add('open');
     if (card) card.classList.add('active');
   });
+}
+
+function switchTab(cardId, tabName, btn) {
+  event.stopPropagation();
+  const card = document.getElementById('card-' + cardId);
+  card.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  card.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  const panel = card.querySelector('.tab-panel[data-tab="' + tabName + '"]');
+  if (panel) panel.classList.add('active');
 }
 
 function toggleDetail(id) {
