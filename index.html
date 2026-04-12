@@ -79,7 +79,7 @@ body{background:var(--bg);color:var(--text);font-family:'Apple SD Gothic Neo','N
 .summary-pill{margin-top:12px;background:var(--gold-dim);border:1px solid rgba(240,192,64,.3);border-radius:6px;padding:8px 12px;font-size:12px;color:var(--gold);font-style:italic;text-align:center}
 
 /* Detail */
-.detail{display:none;background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:24px;margin-top:-4px;margin-bottom:4px}
+.detail{display:none;background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:24px;margin-top:0;margin-bottom:4px;grid-column:1 / -1}
 .detail.open{display:block}
 .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 @media(max-width:640px){.detail-grid{grid-template-columns:1fr}}
@@ -3734,7 +3734,7 @@ const GAMES = [
 
 let currentFilter = 'all';
 let currentSort = 'score';
-let openId = null;
+let openIds = new Set();
 
 /* ── 달러 → 원화 (1 USD = 1,370원) ── */
 const USD_KRW = 1370;
@@ -3838,29 +3838,27 @@ function render() {
   const sorted = getSorted();
   document.getElementById('gameGrid').innerHTML = sorted.map((g,i) => renderCard(g, i+1)).join('');
   updateFilterCount();
-  if (openId) {
-    const el = document.getElementById(`detail-${openId}`);
-    if (el) { el.classList.add('open'); document.getElementById(`card-${openId}`).classList.add('active'); }
-  }
+  openIds.forEach(id => {
+    const el = document.getElementById(`detail-${id}`);
+    const card = document.getElementById(`card-${id}`);
+    if (el) el.classList.add('open');
+    if (card) card.classList.add('active');
+  });
 }
 
 function toggleDetail(id) {
-  if (openId === id) {
-    document.getElementById(`detail-${id}`).classList.remove('open');
-    document.getElementById(`card-${id}`).classList.remove('active');
-    openId = null;
+  const el = document.getElementById(`detail-${id}`);
+  const card = document.getElementById(`card-${id}`);
+  if (!el) return;
+  if (openIds.has(id)) {
+    openIds.delete(id);
+    el.classList.remove('open');
+    card.classList.remove('active');
   } else {
-    if (openId) {
-      const prev = document.getElementById(`detail-${openId}`);
-      const prevCard = document.getElementById(`card-${openId}`);
-      if (prev) prev.classList.remove('open');
-      if (prevCard) prevCard.classList.remove('active');
-    }
-    openId = id;
-    const el = document.getElementById(`detail-${id}`);
-    const card = document.getElementById(`card-${id}`);
-    if (el) { el.classList.add('open'); card.classList.add('active'); }
-    setTimeout(() => el && el.scrollIntoView({behavior:'smooth',block:'nearest'}), 50);
+    openIds.add(id);
+    el.classList.add('open');
+    card.classList.add('active');
+    setTimeout(() => el.scrollIntoView({behavior:'smooth', block:'nearest'}), 50);
   }
 }
 
@@ -3893,7 +3891,7 @@ function jumpToGame(id) {
   document.querySelector('[onclick="filterCards(\'all\')"]').classList.add('active');
   render();
   setTimeout(() => {
-    if (openId !== id) toggleDetail(id);
+    if (!openIds.has(id)) toggleDetail(id);
     const card = document.getElementById(`card-${id}`);
     if (card) card.scrollIntoView({behavior:'smooth', block:'center'});
   }, 80);
