@@ -119,30 +119,55 @@ body{background:var(--bg);color:var(--text);font-family:'Apple SD Gothic Neo','N
 .fin-item-sub{font-size:10px;color:var(--muted);margin-top:2px}
 .fin-basis{font-size:10px;color:#555577;margin-top:10px;line-height:1.7;padding:8px 10px;background:#0a0a18;border-radius:6px;border-left:2px solid #2a2a45}
 
+/* Footer */
+footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center;font-size:12px;color:var(--muted);max-width:860px;margin:0 auto}
+footer span{color:var(--gold)}
+
+/* ── Dashboard ── */
+.dashboard{max-width:860px;margin:24px auto 0;padding:0 24px}
+.dash-divider{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.dash-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+@media(max-width:600px){.kpi-row{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;position:relative;overflow:hidden}
+.kpi::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;border-radius:3px 0 0 3px}
+.kpi-gold::before{background:var(--gold)}
+.kpi-green::before{background:var(--green)}
+.kpi-blue::before{background:var(--blue)}
+.kpi-yellow::before{background:var(--yellow)}
+.kpi-lbl{font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.kpi-num{font-size:30px;font-weight:800;line-height:1}
+.kpi-sub{font-size:11px;color:var(--muted);margin-top:5px}
+
+.charts-row{display:grid;grid-template-columns:3fr 2fr;gap:16px;margin-bottom:16px}
+@media(max-width:600px){.charts-row{grid-template-columns:1fr}}
+.chart-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px}
+.chart-hd{font-size:10px;font-weight:700;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.chart-hd-note{font-size:10px;color:var(--muted);letter-spacing:0;font-weight:400;text-transform:none}
+.chart-wrap{position:relative;height:280px}
+
+.ranks-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px}
+@media(max-width:600px){.ranks-row{grid-template-columns:1fr}}
+.rank-mini{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px}
+.rank-mini-hd{font-size:10px;font-weight:700;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.rank-mini table{width:100%;border-collapse:collapse}
+.rank-mini td{padding:7px 6px;border-bottom:1px solid #1a1a2e;font-size:12px;cursor:pointer;transition:background .15s}
+.rank-mini tr:hover td{background:rgba(240,192,64,.06)}
+.rank-mini tr:last-child td{border-bottom:none}
+.mini-game{display:flex;align-items:center;gap:8px}
+.mini-icon{width:28px;height:28px;border-radius:6px;object-fit:cover;flex-shrink:0;border:1px solid var(--border)}
+
 /* Comment block */
 .comment-block{margin-top:14px;padding:14px 16px;background:#0a0a14;border:1px solid var(--border);border-radius:8px}
 .comment-line{font-size:13px;color:var(--muted);line-height:1.7;padding:5px 0;border-bottom:1px solid #1a1a2e}
 .comment-line:last-child{border-bottom:none}
 
-/* Summary / Ranking view */
-.sum-view{max-width:860px;margin:20px auto 0;padding:0 24px 60px}
-.summary-section{margin-bottom:36px}
-.summary-section h3{font-size:12px;font-weight:700;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border)}
-.rank-table{width:100%;border-collapse:collapse}
-.rank-table th{font-size:10px;color:var(--muted);letter-spacing:0.8px;padding:8px 10px;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap}
-.rank-table td{padding:10px 10px;border-bottom:1px solid #1a1a2e;font-size:13px;vertical-align:middle}
-.rank-table tr:hover td{background:rgba(255,255,255,.02)}
-.rtd-game{display:flex;align-items:center;gap:10px}
-.rtd-icon{width:32px;height:32px;border-radius:8px;object-fit:cover;flex-shrink:0;border:1px solid var(--border)}
-.rtd-name{font-weight:700;font-size:13px}
-.rtd-dev{font-size:10px;color:var(--muted)}
-.btn-summary{background:var(--card);border:1px solid var(--blue);color:var(--blue);font-size:12px;padding:6px 14px;border-radius:20px;cursor:pointer;transition:all .2s;margin-left:auto}
-.btn-summary:hover,.btn-summary.active{background:rgba(96,165,250,.12)}
-
 /* Footer */
 footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center;font-size:12px;color:var(--muted);max-width:860px;margin:0 auto}
 footer span{color:var(--gold)}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
 
@@ -172,6 +197,37 @@ footer span{color:var(--gold)}
   </div>
 </div>
 
+<!-- Dashboard: always-visible overview -->
+<div class="dashboard">
+  <div class="dash-divider">Overview</div>
+  <div class="kpi-row">
+    <div class="kpi kpi-gold" id="kpi1"></div>
+    <div class="kpi kpi-yellow" id="kpi2"></div>
+    <div class="kpi kpi-green" id="kpi3"></div>
+    <div class="kpi kpi-blue" id="kpi4"></div>
+  </div>
+  <div class="charts-row">
+    <div class="chart-box">
+      <div class="chart-hd">포지셔닝 맵 <span class="chart-hd-note">클릭 → 게임 상세</span></div>
+      <div class="chart-wrap"><canvas id="scatterChart"></canvas></div>
+    </div>
+    <div class="chart-box">
+      <div class="chart-hd">연 추정 매출 TOP 10 <span class="chart-hd-note">클릭 → 게임 상세</span></div>
+      <div class="chart-wrap"><canvas id="revenueChart"></canvas></div>
+    </div>
+  </div>
+  <div class="ranks-row">
+    <div class="rank-mini">
+      <div class="rank-mini-hd">🏆 인수 추천 TOP 5</div>
+      <table id="top5score"></table>
+    </div>
+    <div class="rank-mini">
+      <div class="rank-mini-hd">📱 광고 수익 잠재력 TOP 5</div>
+      <table id="top5ad"></table>
+    </div>
+  </div>
+</div>
+
 <div class="filters">
   <span style="font-size:11px;color:var(--muted);font-weight:700">정렬:</span>
   <button class="filter-btn active" onclick="sortCards('score')">점수순</button>
@@ -186,15 +242,10 @@ footer span{color:var(--gold)}
   <button class="filter-btn" onclick="filterCards('social')">소셜/시뮬</button>
   <button class="filter-btn" onclick="filterCards('idle')">아이들/방치형</button>
   <button class="filter-btn" onclick="filterCards('racing')">레이싱</button>
-  <button class="btn-summary" id="summaryBtn" onclick="showSummary()">📊 요약 랭킹</button>
 </div>
 
-<div class="section" id="gameSection">
+<div class="section">
   <div class="grid" id="gameGrid"></div>
-</div>
-
-<div class="sum-view" id="summaryView" style="display:none">
-  <div id="summaryContent"></div>
 </div>
 
 <footer>
@@ -3574,9 +3625,8 @@ const GAMES = [
 let currentFilter = 'all';
 let currentSort = 'score';
 let openId = null;
-let showingRanking = false;
 
-// 달러 → 원화 변환 (1 USD = 1,370원)
+/* ── 달러 → 원화 (1 USD = 1,370원) ── */
 const USD_KRW = 1370;
 function fmtKrw(usd) {
   const w = usd * USD_KRW;
@@ -3592,6 +3642,11 @@ function krw(s) {
     .replace(/\$([0-9,]+(?:\.[0-9]+)?)만/g, (_,n) => fmtKrw(parseFloat(n.replace(/,/g,''))*1e4))
     .replace(/\$([0-9.]+)M\b/g, (_,n) => fmtKrw(parseFloat(n)*1e6))
     .replace(/\$([0-9.]+)\/MAU·월/g, (_,n) => `₩${Math.round(parseFloat(n)*USD_KRW)}/MAU·월`);
+}
+function parseRevUsd(s) {
+  if (!s) return 0;
+  const m = s.match(/\$([0-9,]+(?:\.[0-9]+)?)만/);
+  return m ? parseFloat(m[1].replace(/,/g,'')) * 1e4 : 0;
 }
 
 function getColor(score) {
@@ -3612,17 +3667,16 @@ function makeComment(g) {
   return lines;
 }
 
+/* ── Card renderer ── */
 function renderCard(g, rank) {
   const pct = (v, max) => Math.round(v/max*100);
   const barsHtml = (g.bars || []).map(([lbl,v,max]) =>
     `<div class="bar-row"><span class="bar-lbl">${lbl}</span><div class="bar-bg"><div class="bar-fill" style="width:${pct(v,max)}%"></div></div><span class="bar-val">${v}/${max}</span></div>`
   ).join('');
-
   const f = g.finance || {};
   const opColorMap = {green:'var(--green)',yellow:'var(--yellow)',gold:'var(--gold)',red:'var(--red)'};
   const opClr = opColorMap[f.opColor] || 'var(--text)';
   const commentHtml = makeComment(g).map(l => `<div class="comment-line">${l}</div>`).join('');
-
   return `
 <div class="card" id="card-${g.id}" data-genre="${g.genre}" onclick="toggleDetail('${g.id}')">
   <span class="card-rank">#${rank}</span>
@@ -3670,7 +3724,6 @@ function getSorted() {
 }
 
 function render() {
-  if (showingRanking) return;
   const sorted = getSorted();
   document.getElementById('gameGrid').innerHTML = sorted.map((g,i) => renderCard(g, i+1)).join('');
   if (openId) {
@@ -3708,88 +3761,158 @@ function sortCards(type) {
   render();
 }
 
+const FILTER_LABELS = ['전체','한국 캐주얼','하이퍼캐주얼','러너','퍼즐/매치3','배틀/아케이드','소셜/시뮬','아이들/방치형','레이싱'];
 function filterCards(type) {
   currentFilter = type;
-  if (showingRanking) showCards();
   document.querySelectorAll('.filter-btn').forEach(b => {
-    const t = b.textContent.trim();
-    if (['전체','한국 캐주얼','하이퍼캐주얼','러너','퍼즐/매치3','배틀/아케이드','소셜/시뮬','아이들/방치형','레이싱'].includes(t))
-      b.classList.remove('active');
+    if (FILTER_LABELS.includes(b.textContent.trim())) b.classList.remove('active');
   });
   event.target.classList.add('active');
   render();
 }
 
-function showCards() {
-  showingRanking = false;
-  document.getElementById('gameSection').style.display = '';
-  document.getElementById('summaryView').style.display = 'none';
-  document.getElementById('summaryBtn').classList.remove('active');
+/* ── Dashboard: jump to game detail ── */
+function jumpToGame(id) {
+  currentFilter = 'all';
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    if (FILTER_LABELS.includes(b.textContent.trim())) b.classList.remove('active');
+  });
+  document.querySelector('[onclick="filterCards(\'all\')"]').classList.add('active');
+  render();
+  setTimeout(() => {
+    if (openId !== id) toggleDetail(id);
+    const card = document.getElementById(`card-${id}`);
+    if (card) card.scrollIntoView({behavior:'smooth', block:'center'});
+  }, 80);
 }
 
-function showSummary() {
-  showingRanking = true;
-  document.getElementById('gameSection').style.display = 'none';
-  document.getElementById('summaryView').style.display = 'block';
-  document.getElementById('summaryBtn').classList.add('active');
-  document.querySelectorAll('.filter-btn').forEach(b => {
-    const t = b.textContent.trim();
-    if (['전체','한국 캐주얼','하이퍼캐주얼','러너','퍼즐/매치3','배틀/아케이드','소셜/시뮬','아이들/방치형','레이싱'].includes(t))
-      b.classList.remove('active');
-  });
+/* ── Dashboard: KPI + Charts + Mini Rankings ── */
+function initDashboard() {
+  const games = GAMES.filter(g => g);
+  const passCount = games.filter(g => g.verdict === 'pass').length;
+  const condCount = games.filter(g => g.verdict === 'cond').length;
+  const avgScore = Math.round(games.reduce((s,g) => s + g.score, 0) / games.length);
+  const highAdCount = games.filter(g => g.adLevel === 'high').length;
+
+  // KPI cards
+  document.getElementById('kpi1').innerHTML = `<div class="kpi-lbl">분석 게임</div><div class="kpi-num" style="color:var(--gold)">${games.length}<span style="font-size:16px;color:var(--muted)">개</span></div><div class="kpi-sub">캐주얼 장르 전수 분석</div>`;
+  document.getElementById('kpi2').innerHTML = `<div class="kpi-lbl">평균 인수 점수</div><div class="kpi-num" style="color:var(--yellow)">${avgScore}<span style="font-size:16px;color:var(--muted)">/100</span></div><div class="kpi-sub">5항목 100점 기준</div>`;
+  document.getElementById('kpi3').innerHTML = `<div class="kpi-lbl">인수 추천</div><div class="kpi-num" style="color:var(--green)">${passCount}<span style="font-size:16px;color:var(--muted)">개</span></div><div class="kpi-sub">조건부 검토 ${condCount}개</div>`;
+  document.getElementById('kpi4').innerHTML = `<div class="kpi-lbl">즉시 광고 수익화</div><div class="kpi-num" style="color:var(--blue)">${highAdCount}<span style="font-size:16px;color:var(--muted)">개</span></div><div class="kpi-sub">광고 수용도 높음</div>`;
+
+  // Mini Rankings
   const adScore = g => g.bars && g.bars[2] ? g.bars[2][1] : 0;
-  const byScore = GAMES.filter(g=>g).sort((a,b) => b.score - a.score);
-  const byAd = GAMES.filter(g=>g).sort((a,b) => adScore(b) - adScore(a));
-  const opColorMap = {green:'var(--green)',yellow:'var(--yellow)',gold:'var(--gold)',red:'var(--red)'};
+  const byScore = [...games].sort((a,b) => b.score - a.score).slice(0, 5);
+  const byAd = [...games].sort((a,b) => adScore(b) - adScore(a)).slice(0, 5);
 
-  const scoreRows = byScore.slice(0,15).map((g,i) => {
-    const f = g.finance || {};
-    const opClr = opColorMap[f.opColor] || 'var(--text)';
-    return `<tr>
-      <td><b>${i+1}</b></td>
-      <td><div class="rtd-game"><img class="rtd-icon" src="${g.icon}" loading="lazy"><div><div class="rtd-name">${g.name}</div><div class="rtd-dev">${g.dev}</div></div></div></td>
-      <td><b style="color:${getColor(g.score)}">${g.score}</b></td>
-      <td><span class="verdict v-${g.verdict}">${g.verdictLabel}</span></td>
-      <td style="color:var(--blue)">${krw(f.revYear)||'-'}</td>
-      <td style="color:${opClr}">${krw(f.opProfitYear)||'-'}</td>
+  const miniRow = (g, rank, metric) => `
+    <tr onclick="jumpToGame('${g.id}')">
+      <td style="width:20px;color:var(--muted);font-weight:700;font-size:11px">${rank}</td>
+      <td><div class="mini-game">
+        <img class="mini-icon" src="${g.icon}" loading="lazy">
+        <div><div style="font-weight:700;font-size:12px">${g.name}</div><div style="font-size:10px;color:var(--muted)">${g.dev}</div></div>
+      </div></td>
+      <td style="text-align:right;white-space:nowrap">${metric}</td>
     </tr>`;
-  }).join('');
 
-  const adRows = byAd.slice(0,15).map((g,i) => {
-    const f = g.finance || {};
-    const adCls = g.adLevel==='high'?'ad-h':g.adLevel==='mid'?'ad-m':'ad-l';
-    return `<tr>
-      <td><b>${i+1}</b></td>
-      <td><div class="rtd-game"><img class="rtd-icon" src="${g.icon}" loading="lazy"><div><div class="rtd-name">${g.name}</div><div class="rtd-dev">${g.dev}</div></div></div></td>
-      <td><b style="color:var(--yellow)">${adScore(g)}/25</b></td>
-      <td><span class="ad-tag ${adCls}">${g.adLabel||''}</span></td>
-      <td style="color:var(--blue)">${krw(f.revYear)||'-'}</td>
-    </tr>`;
-  }).join('');
+  document.getElementById('top5score').innerHTML = byScore.map((g,i) =>
+    miniRow(g, i+1, `<b style="color:${getColor(g.score)};font-size:14px">${g.score}</b><span style="color:var(--muted);font-size:10px">점</span>`)
+  ).join('');
 
-  document.getElementById('summaryContent').innerHTML = `
-    <div class="summary-section">
-      <h3>🏆 인수 추천 랭킹 TOP 15 · 종합점수 기준</h3>
-      <div style="overflow-x:auto">
-      <table class="rank-table">
-        <thead><tr><th>#</th><th>게임</th><th>점수</th><th>판정</th><th>연 매출 추정</th><th>연 영업이익 추정</th></tr></thead>
-        <tbody>${scoreRows}</tbody>
-      </table>
-      </div>
-    </div>
-    <div class="summary-section">
-      <h3>📱 광고 수익 잠재력 TOP 15 · 광고잠재력(25점) 기준</h3>
-      <div style="overflow-x:auto">
-      <table class="rank-table">
-        <thead><tr><th>#</th><th>게임</th><th>광고잠재력</th><th>광고 수용도</th><th>연 매출 추정</th></tr></thead>
-        <tbody>${adRows}</tbody>
-      </table>
-      </div>
-    </div>
-  `;
+  document.getElementById('top5ad').innerHTML = byAd.map((g,i) =>
+    miniRow(g, i+1, `<b style="color:var(--yellow);font-size:14px">${adScore(g)}</b><span style="color:var(--muted);font-size:10px">/25</span>`)
+  ).join('');
+
+  // Chart.js global defaults
+  Chart.defaults.color = '#8888aa';
+  Chart.defaults.borderColor = '#2a2a45';
+  Chart.defaults.font.family = "'Apple SD Gothic Neo','Noto Sans KR',sans-serif";
+  Chart.defaults.font.size = 11;
+
+  const vClr = {pass:'rgba(74,222,128,0.8)', cond:'rgba(250,204,21,0.8)', fail:'rgba(248,113,113,0.7)'};
+  const vBdr = {pass:'#4ade80', cond:'#facc15', fail:'#f87171'};
+
+  // ── Scatter: 포지셔닝 맵 ──
+  const sgames = games.filter(g => g.bars && g.bars[2]);
+  new Chart(document.getElementById('scatterChart'), {
+    type: 'scatter',
+    data: {
+      datasets: [{
+        data: sgames.map(g => ({x: g.bars[2][1], y: g.score, id: g.id, name: g.name})),
+        backgroundColor: sgames.map(g => vClr[g.verdict] || 'rgba(136,136,170,0.5)'),
+        borderColor: sgames.map(g => vBdr[g.verdict] || '#8888aa'),
+        borderWidth: 1.5,
+        pointRadius: 5.5,
+        pointHoverRadius: 8,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: {display: false},
+        tooltip: {
+          callbacks: {
+            label: ctx => {
+              const d = ctx.raw;
+              return [`${d.name}`, `인수 적합도 ${d.y}점 | 광고 잠재력 ${d.x}/25`];
+            }
+          },
+          backgroundColor: '#1a1a2e', borderColor: '#2a2a45', borderWidth: 1, padding: 10,
+          titleColor: '#e8e8f0', bodyColor: '#8888aa',
+        }
+      },
+      scales: {
+        x: {min:0, max:25, grid:{color:'#1e1e3a'},
+          title:{display:true, text:'← 광고 잠재력 (25점 만점) →', color:'#8888aa', font:{size:10}}},
+        y: {min:30, max:85, grid:{color:'#1e1e3a'},
+          title:{display:true, text:'인수 적합도 (100점)', color:'#8888aa', font:{size:10}}}
+      },
+      onClick: (e, elements) => {
+        if (elements.length) jumpToGame(sgames[elements[0].index].id);
+      }
+    }
+  });
+
+  // ── Bar: 연 매출 TOP 10 ──
+  const top10 = [...games]
+    .filter(g => g.finance && parseRevUsd(g.finance.revYear) > 0)
+    .sort((a,b) => parseRevUsd(b.finance.revYear) - parseRevUsd(a.finance.revYear))
+    .slice(0, 10);
+
+  new Chart(document.getElementById('revenueChart'), {
+    type: 'bar',
+    data: {
+      labels: top10.map(g => g.name.length > 12 ? g.name.slice(0,12)+'…' : g.name),
+      datasets: [{
+        data: top10.map(g => Math.round(parseRevUsd(g.finance.revYear) * USD_KRW / 1e8)),
+        backgroundColor: top10.map(g => vClr[g.verdict] || 'rgba(136,136,170,0.5)'),
+        borderColor: top10.map(g => vBdr[g.verdict] || '#8888aa'),
+        borderWidth: 1, borderRadius: 4,
+      }]
+    },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: {display: false},
+        tooltip: {
+          callbacks: { label: ctx => ` 연 매출 약 ${ctx.raw}억원` },
+          backgroundColor: '#1a1a2e', borderColor: '#2a2a45', borderWidth: 1, padding: 10,
+          bodyColor: '#e8e8f0',
+        }
+      },
+      scales: {
+        x: {grid:{color:'#1e1e3a'}, ticks:{callback: v => `${v}억`}},
+        y: {grid:{display:false}, ticks:{font:{size:11}}}
+      },
+      onClick: (e, elements) => {
+        if (elements.length) jumpToGame(top10[elements[0].index].id);
+      }
+    }
+  });
 }
 
 render();
+initDashboard();
 </script>
 </body>
 </html>
