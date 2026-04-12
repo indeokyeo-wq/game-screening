@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>캐주얼 게임 M&A 스크리닝 대시보드 (라이트) | 여인덕</title>
+<title>캐주얼 게임 M&A 스크리닝 대시보드 | 여인덕</title>
 <style>
 :root {
   --bg:#f2f2ed; --card:#ffffff; --card2:#f7f7f3; --border:#d8d8d0;
@@ -72,11 +72,11 @@ body{background:var(--bg);color:var(--text);font-family:'Apple SD Gothic Neo','N
 .bars{}
 .bar-row{display:flex;align-items:center;gap:7px;margin-bottom:5px}
 .bar-lbl{font-size:10px;color:var(--muted);width:72px;flex-shrink:0}
-.bar-bg{flex:1;height:4px;background:#2a2a45;border-radius:2px;overflow:hidden}
+.bar-bg{flex:1;height:4px;background:#d8d8d0;border-radius:2px;overflow:hidden}
 .bar-fill{height:100%;border-radius:2px;background:var(--gold);transition:width .4s}
 .bar-val{font-size:10px;color:var(--muted);width:30px;text-align:right;flex-shrink:0}
 
-.summary-pill{margin-top:12px;background:var(--gold-dim);border:1px solid rgba(240,192,64,.3);border-radius:6px;padding:8px 12px;font-size:12px;color:var(--gold);font-style:italic;text-align:center}
+.summary-pill{margin-top:12px;background:var(--gold-dim);border:1px solid rgba(154,110,0,.3);border-radius:6px;padding:8px 12px;font-size:12px;color:var(--gold);font-style:italic;text-align:center}
 
 /* Detail */
 .detail{display:none;border-top:1px solid var(--border);margin-top:14px;padding-top:14px}
@@ -100,7 +100,7 @@ body{background:var(--bg);color:var(--text);font-family:'Apple SD Gothic Neo','N
 .dblock li::before{content:'—';position:absolute;left:0;color:var(--gold)}
 .dblock li b{color:var(--text)}
 
-.quote{background:#0a0a14;border-left:3px solid #2a2a45;border-radius:0 6px 6px 0;padding:10px 14px;margin:7px 0;font-size:12px;color:var(--muted);font-style:italic;line-height:1.6}
+.quote{background:#eeeee9;border-left:3px solid var(--border);border-radius:0 6px 6px 0;padding:10px 14px;margin:7px 0;font-size:12px;color:var(--muted);font-style:italic;line-height:1.6}
 
 .ad-tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;margin-bottom:8px}
 .ad-h{background:rgba(74,222,128,.15);color:var(--green)}
@@ -193,13 +193,13 @@ footer span{color:var(--gold)}
 .criteria-body.open{display:block}
 .criteria-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}
 @media(max-width:640px){.criteria-grid{grid-template-columns:1fr}}
-.c-item{background:#0a0a14;border:1px solid var(--border);border-radius:8px;padding:14px 16px}
+.c-item{background:#eeeee9;border:1px solid var(--border);border-radius:8px;padding:14px 16px}
 .c-item-hd{display:flex;align-items:center;gap:8px;margin-bottom:8px}
 .c-num{width:22px;height:22px;border-radius:50%;background:var(--gold-dim);border:1px solid var(--gold);color:var(--gold);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .c-name{font-size:12px;font-weight:700;color:var(--text)}
 .c-pts{margin-left:auto;font-size:11px;color:var(--gold);font-weight:700}
 .c-desc{font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:8px}
-.c-case{font-size:10px;color:#4466aa;background:#0d0d22;border-left:2px solid #2a3a6a;border-radius:0 4px 4px 0;padding:5px 8px;line-height:1.5}
+.c-case{font-size:10px;color:#2255aa;background:#e8eef8;border-left:2px solid #99aedd;border-radius:0 4px 4px 0;padding:5px 8px;line-height:1.5}
 
 /* ── 필터 카운트 ── */
 .filter-count{font-size:11px;color:var(--gold);font-weight:700;margin-left:auto;white-space:nowrap}
@@ -207,16 +207,16 @@ footer span{color:var(--gold)}
 /* ── CTA 버튼 ── */
 .cta-row{display:flex;justify-content:flex-end;gap:10px;max-width:860px;margin:16px auto 0;padding:0 24px}
 .cta-btn{background:var(--gold-dim);border:1px solid var(--gold);color:var(--gold);font-size:12px;font-weight:700;padding:8px 18px;border-radius:20px;cursor:pointer;transition:all .2s}
-.cta-btn:hover{background:rgba(240,192,64,.25)}
-.cta-btn-primary{background:var(--gold);color:#0f0f1a;border:1px solid var(--gold)}
+.cta-btn:hover{background:rgba(154,110,0,.15)}
+.cta-btn-primary{background:var(--gold);color:#ffffff;border:1px solid var(--gold)}
 .cta-btn-primary:hover{background:#e0b030}
 
 /* ── 차트 설명 ── */
-.chart-desc{font-size:11px;color:var(--muted);margin-bottom:12px;line-height:1.5;padding:6px 10px;background:#0a0a14;border-radius:6px;border-left:2px solid var(--border)}
+.chart-desc{font-size:11px;color:var(--muted);margin-bottom:12px;line-height:1.5;padding:6px 10px;background:#eeeee9;border-radius:6px;border-left:2px solid var(--border)}
 
 /* ── 평가 기준 툴팁 ── */
 .bar-lbl{position:relative}
-.bar-lbl[title]:hover::after{content:attr(title);position:absolute;left:0;bottom:110%;white-space:nowrap;background:#1a1a38;border:1px solid var(--border);color:var(--text);font-size:10px;padding:4px 8px;border-radius:4px;z-index:10;pointer-events:none}
+.bar-lbl[title]:hover::after{content:attr(title);position:absolute;left:0;bottom:110%;white-space:nowrap;background:#ffffff;border:1px solid var(--border);color:var(--text);font-size:10px;padding:4px 8px;border-radius:4px;z-index:10;pointer-events:none}
 
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -286,7 +286,7 @@ footer span{color:var(--gold)}
           <div class="c-case">📌 Rovio → Ruby Games ($90M, 2021): 소규모 스튜디오 + 성과연동 조건부 지급으로 광고 수익 변동성 헤지</div>
         </div>
       </div>
-      <div style="margin-top:14px;padding:10px 14px;background:#0a0a14;border-radius:6px;font-size:11px;color:var(--muted);line-height:1.7;border-left:3px solid #333355">
+      <div style="margin-top:14px;padding:10px 14px;background:#eeeee9;border-radius:6px;font-size:11px;color:var(--muted);line-height:1.7;border-left:3px solid #bbbbcc">
         <b style="color:var(--text)">밸류에이션 벤치마크 (M&A 실거래 기반)</b> · 하이퍼캐주얼: 연매출 2~3x · 퍼즐/워드(에버그린): 4~6x · 포트폴리오 딜: 5~7x<br>
         <span style="color:#4466aa">⚠ 본 스코어는 공개 데이터(Google Play) + Claude AI 분석 기반 추정입니다. 실제 인수 전 별도 Due Diligence 필수.</span>
       </div>
@@ -3989,7 +3989,7 @@ function initDashboard() {
 
   // Chart.js global defaults
   Chart.defaults.color = '#8888aa';
-  Chart.defaults.borderColor = '#2a2a45';
+  Chart.defaults.borderColor = '#d0d0c8';
   Chart.defaults.font.family = "'Apple SD Gothic Neo','Noto Sans KR',sans-serif";
   Chart.defaults.font.size = 11;
 
@@ -4021,15 +4021,15 @@ function initDashboard() {
               return [`${d.name}`, `인수 적합도 ${d.y}점 | 광고 개선 여지 ${d.x}/30`];
             }
           },
-          backgroundColor: '#1a1a2e', borderColor: '#2a2a45', borderWidth: 1, padding: 10,
+          backgroundColor: '#ffffff', borderColor: '#d0d0c8', borderWidth: 1, padding: 10,
           titleColor: '#e8e8f0', bodyColor: '#8888aa',
         }
       },
       scales: {
-        x: {min:0, max:30, grid:{color:'#1e1e3a'},
-          title:{display:true, text:'← 광고 개선 여지 (30점 만점) →', color:'#8888aa', font:{size:10}}},
-        y: {min:30, max:85, grid:{color:'#1e1e3a'},
-          title:{display:true, text:'인수 적합도 (100점)', color:'#8888aa', font:{size:10}}}
+        x: {min:0, max:30, grid:{color:'#e0e0d8'},
+          title:{display:true, text:'← 광고 개선 여지 (30점 만점) →', color:'#60607a', font:{size:10}}},
+        y: {min:30, max:85, grid:{color:'#e0e0d8'},
+          title:{display:true, text:'인수 적합도 (100점)', color:'#60607a', font:{size:10}}}
       },
       onClick: (e, elements) => {
         if (elements.length) jumpToGame(sgames[elements[0].index].id);
@@ -4060,12 +4060,12 @@ function initDashboard() {
         legend: {display: false},
         tooltip: {
           callbacks: { label: ctx => ` 연 매출 약 ${ctx.raw}억원` },
-          backgroundColor: '#1a1a2e', borderColor: '#2a2a45', borderWidth: 1, padding: 10,
+          backgroundColor: '#ffffff', borderColor: '#d0d0c8', borderWidth: 1, padding: 10,
           bodyColor: '#e8e8f0',
         }
       },
       scales: {
-        x: {grid:{color:'#1e1e3a'}, ticks:{callback: v => `${v}억`}},
+        x: {grid:{color:'#e0e0d8'}, ticks:{callback: v => `${v}억`}},
         y: {grid:{display:false}, ticks:{font:{size:11}}}
       },
       onClick: (e, elements) => {

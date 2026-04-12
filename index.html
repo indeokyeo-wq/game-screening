@@ -6,16 +6,16 @@
 <title>캐주얼 게임 M&A 스크리닝 대시보드 | 여인덕</title>
 <style>
 :root {
-  --bg:#f2f2ed; --card:#ffffff; --card2:#f7f7f3; --border:#d8d8d0;
-  --gold:#9a6e00; --gold-dim:rgba(154,110,0,0.10);
-  --text:#1a1a2e; --muted:#60607a;
-  --green:#16a34a; --yellow:#b45309; --red:#dc2626; --blue:#2563eb;
+  --bg:#0f0f1a; --card:#1a1a2e; --card2:#141428; --border:#2a2a45;
+  --gold:#f0c040; --gold-dim:rgba(240,192,64,0.12);
+  --text:#e8e8f0; --muted:#8888aa;
+  --green:#4ade80; --yellow:#facc15; --red:#f87171; --blue:#60a5fa;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:'Apple SD Gothic Neo','Noto Sans KR',sans-serif;line-height:1.6}
 
 /* Header */
-.header{background:linear-gradient(135deg,#e8e8f0 0%,#dde0ef 100%);border-bottom:1px solid var(--border);padding:44px 24px 36px;text-align:center}
+.header{background:linear-gradient(135deg,#0f0f1a 0%,#1a1a38 100%);border-bottom:1px solid var(--border);padding:44px 24px 36px;text-align:center}
 .badge{display:inline-block;background:var(--gold-dim);border:1px solid var(--gold);color:var(--gold);font-size:11px;font-weight:700;letter-spacing:2px;padding:4px 14px;border-radius:20px;margin-bottom:16px}
 .header h1{font-size:28px;font-weight:800;margin-bottom:8px}
 .header h1 span{color:var(--gold)}
@@ -29,7 +29,7 @@ body{background:var(--bg);color:var(--text);font-family:'Apple SD Gothic Neo','N
 .pipeline-box{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:12px;padding:18px 22px}
 .pipeline-box .lbl{color:var(--gold);font-size:10px;font-weight:700;letter-spacing:2px;margin-bottom:10px}
 .pipe{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.ps{background:#e4e4e0;border:1px solid var(--border);border-radius:6px;padding:4px 11px;font-size:12px}
+.ps{background:#0f0f1a;border:1px solid var(--border);border-radius:6px;padding:4px 11px;font-size:12px}
 .pa{color:var(--gold);font-size:12px}
 
 /* Filters */
@@ -53,7 +53,7 @@ body{background:var(--bg);color:var(--text);font-family:'Apple SD Gothic Neo','N
 .card-title{}
 .card-name{font-size:16px;font-weight:800;margin-bottom:2px}
 .card-dev{font-size:11px;color:var(--muted)}
-.card-genre{display:inline-block;font-size:10px;padding:2px 8px;border-radius:4px;background:#ededea;color:var(--muted);border:1px solid var(--border);margin-bottom:14px;margin-right:4px}
+.card-genre{display:inline-block;font-size:10px;padding:2px 8px;border-radius:4px;background:#1f1f38;color:var(--muted);border:1px solid var(--border);margin-bottom:14px;margin-right:4px}
 
 .score-row{display:flex;align-items:flex-end;gap:10px;margin-bottom:12px}
 .score-big{font-size:36px;font-weight:800;line-height:1}
@@ -72,11 +72,11 @@ body{background:var(--bg);color:var(--text);font-family:'Apple SD Gothic Neo','N
 .bars{}
 .bar-row{display:flex;align-items:center;gap:7px;margin-bottom:5px}
 .bar-lbl{font-size:10px;color:var(--muted);width:72px;flex-shrink:0}
-.bar-bg{flex:1;height:4px;background:#d8d8d0;border-radius:2px;overflow:hidden}
+.bar-bg{flex:1;height:4px;background:#2a2a45;border-radius:2px;overflow:hidden}
 .bar-fill{height:100%;border-radius:2px;background:var(--gold);transition:width .4s}
 .bar-val{font-size:10px;color:var(--muted);width:30px;text-align:right;flex-shrink:0}
 
-.summary-pill{margin-top:12px;background:var(--gold-dim);border:1px solid rgba(154,110,0,.3);border-radius:6px;padding:8px 12px;font-size:12px;color:var(--gold);font-style:italic;text-align:center}
+.summary-pill{margin-top:12px;background:var(--gold-dim);border:1px solid rgba(240,192,64,.3);border-radius:6px;padding:8px 12px;font-size:12px;color:var(--gold);font-style:italic;text-align:center}
 
 /* Detail */
 .detail{display:none;border-top:1px solid var(--border);margin-top:14px;padding-top:14px}
@@ -88,7 +88,7 @@ body{background:var(--bg);color:var(--text);font-family:'Apple SD Gothic Neo','N
 .tab-btn.active{background:var(--gold);border-color:var(--gold);color:#000}
 .tab-panel{display:none}
 .tab-panel.active{display:block}
-.tab-line{font-size:11px;color:var(--muted);line-height:1.6;padding:5px 0;border-bottom:1px solid var(--border)}
+.tab-line{font-size:11px;color:var(--muted);line-height:1.6;padding:5px 0;border-bottom:1px solid #1a1a2e}
 .tab-line:last-child{border-bottom:none}
 .tab-line b{color:var(--text)}
 
@@ -100,7 +100,7 @@ body{background:var(--bg);color:var(--text);font-family:'Apple SD Gothic Neo','N
 .dblock li::before{content:'—';position:absolute;left:0;color:var(--gold)}
 .dblock li b{color:var(--text)}
 
-.quote{background:#eeeee9;border-left:3px solid var(--border);border-radius:0 6px 6px 0;padding:10px 14px;margin:7px 0;font-size:12px;color:var(--muted);font-style:italic;line-height:1.6}
+.quote{background:#0a0a14;border-left:3px solid #2a2a45;border-radius:0 6px 6px 0;padding:10px 14px;margin:7px 0;font-size:12px;color:var(--muted);font-style:italic;line-height:1.6}
 
 .ad-tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;margin-bottom:8px}
 .ad-h{background:rgba(74,222,128,.15);color:var(--green)}
@@ -111,11 +111,11 @@ body{background:var(--bg);color:var(--text);font-family:'Apple SD Gothic Neo','N
 .close-row:hover{color:var(--text)}
 
 /* Finance Block */
-.fin-block{background:#f0f0ec;border:1px solid var(--border);border-radius:8px;padding:12px}
-.fin-block h4{font-size:9px;font-weight:700;letter-spacing:1px;color:var(--blue);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)}
-.fin-company{font-size:10px;color:var(--muted);margin-bottom:8px;padding:4px 8px;background:#e8e8e4;border-radius:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fin-block{background:#080812;border:1px solid #1e1e3a;border-radius:8px;padding:12px}
+.fin-block h4{font-size:9px;font-weight:700;letter-spacing:1px;color:var(--blue);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid #1e1e3a}
+.fin-company{font-size:10px;color:var(--muted);margin-bottom:8px;padding:4px 8px;background:#0d0d20;border-radius:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .fin-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
-.fin-item{background:#f5f5f1;border:1px solid var(--border);border-radius:6px;padding:7px 8px}
+.fin-item{background:#0d0d22;border:1px solid #1e1e3a;border-radius:6px;padding:7px 8px}
 .fin-item-lbl{font-size:8px;color:var(--muted);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:2px}
 .fin-item-val{font-size:12px;font-weight:700;color:var(--text)}
 .fin-item-val.blue{color:var(--blue)}
@@ -124,7 +124,7 @@ body{background:var(--bg);color:var(--text);font-family:'Apple SD Gothic Neo','N
 .fin-item-val.red{color:var(--red)}
 .fin-item-val.yellow{color:var(--yellow)}
 .fin-item-sub{font-size:9px;color:var(--muted);margin-top:1px}
-.fin-basis{font-size:9px;color:#666678;margin-top:6px;line-height:1.5;padding:6px 8px;background:#eaeae6;border-radius:5px;border-left:2px solid var(--border)}
+.fin-basis{font-size:9px;color:#555577;margin-top:6px;line-height:1.5;padding:6px 8px;background:#0a0a18;border-radius:5px;border-left:2px solid #2a2a45}
 
 /* Footer */
 footer{border-top:1px solid var(--border);padding:28px 24px;text-align:center;font-size:12px;color:var(--muted);max-width:860px;margin:0 auto}
@@ -159,15 +159,15 @@ footer span{color:var(--gold)}
 .rank-mini{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px}
 .rank-mini-hd{font-size:10px;font-weight:700;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
 .rank-mini table{width:100%;border-collapse:collapse}
-.rank-mini td{padding:7px 6px;border-bottom:1px solid var(--border);font-size:12px;cursor:pointer;transition:background .15s}
-.rank-mini tr:hover td{background:rgba(154,110,0,.07)}
+.rank-mini td{padding:7px 6px;border-bottom:1px solid #1a1a2e;font-size:12px;cursor:pointer;transition:background .15s}
+.rank-mini tr:hover td{background:rgba(240,192,64,.06)}
 .rank-mini tr:last-child td{border-bottom:none}
 .mini-game{display:flex;align-items:center;gap:8px}
 .mini-icon{width:28px;height:28px;border-radius:6px;object-fit:cover;flex-shrink:0;border:1px solid var(--border)}
 
 /* Comment block (legacy - kept for safety) */
-.comment-block{padding:10px 12px;background:#f5f5f1;border:1px solid var(--border);border-radius:8px}
-.comment-line{font-size:11px;color:var(--muted);line-height:1.6;padding:4px 0;border-bottom:1px solid var(--border)}
+.comment-block{padding:10px 12px;background:#0a0a14;border:1px solid var(--border);border-radius:8px}
+.comment-line{font-size:11px;color:var(--muted);line-height:1.6;padding:4px 0;border-bottom:1px solid #1a1a2e}
 .comment-line:last-child{border-bottom:none}
 
 /* Footer */
@@ -193,13 +193,13 @@ footer span{color:var(--gold)}
 .criteria-body.open{display:block}
 .criteria-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}
 @media(max-width:640px){.criteria-grid{grid-template-columns:1fr}}
-.c-item{background:#eeeee9;border:1px solid var(--border);border-radius:8px;padding:14px 16px}
+.c-item{background:#0a0a14;border:1px solid var(--border);border-radius:8px;padding:14px 16px}
 .c-item-hd{display:flex;align-items:center;gap:8px;margin-bottom:8px}
 .c-num{width:22px;height:22px;border-radius:50%;background:var(--gold-dim);border:1px solid var(--gold);color:var(--gold);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .c-name{font-size:12px;font-weight:700;color:var(--text)}
 .c-pts{margin-left:auto;font-size:11px;color:var(--gold);font-weight:700}
 .c-desc{font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:8px}
-.c-case{font-size:10px;color:#2255aa;background:#e8eef8;border-left:2px solid #99aedd;border-radius:0 4px 4px 0;padding:5px 8px;line-height:1.5}
+.c-case{font-size:10px;color:#4466aa;background:#0d0d22;border-left:2px solid #2a3a6a;border-radius:0 4px 4px 0;padding:5px 8px;line-height:1.5}
 
 /* ── 필터 카운트 ── */
 .filter-count{font-size:11px;color:var(--gold);font-weight:700;margin-left:auto;white-space:nowrap}
@@ -207,16 +207,16 @@ footer span{color:var(--gold)}
 /* ── CTA 버튼 ── */
 .cta-row{display:flex;justify-content:flex-end;gap:10px;max-width:860px;margin:16px auto 0;padding:0 24px}
 .cta-btn{background:var(--gold-dim);border:1px solid var(--gold);color:var(--gold);font-size:12px;font-weight:700;padding:8px 18px;border-radius:20px;cursor:pointer;transition:all .2s}
-.cta-btn:hover{background:rgba(154,110,0,.15)}
-.cta-btn-primary{background:var(--gold);color:#ffffff;border:1px solid var(--gold)}
+.cta-btn:hover{background:rgba(240,192,64,.25)}
+.cta-btn-primary{background:var(--gold);color:#0f0f1a;border:1px solid var(--gold)}
 .cta-btn-primary:hover{background:#e0b030}
 
 /* ── 차트 설명 ── */
-.chart-desc{font-size:11px;color:var(--muted);margin-bottom:12px;line-height:1.5;padding:6px 10px;background:#eeeee9;border-radius:6px;border-left:2px solid var(--border)}
+.chart-desc{font-size:11px;color:var(--muted);margin-bottom:12px;line-height:1.5;padding:6px 10px;background:#0a0a14;border-radius:6px;border-left:2px solid var(--border)}
 
 /* ── 평가 기준 툴팁 ── */
 .bar-lbl{position:relative}
-.bar-lbl[title]:hover::after{content:attr(title);position:absolute;left:0;bottom:110%;white-space:nowrap;background:#ffffff;border:1px solid var(--border);color:var(--text);font-size:10px;padding:4px 8px;border-radius:4px;z-index:10;pointer-events:none}
+.bar-lbl[title]:hover::after{content:attr(title);position:absolute;left:0;bottom:110%;white-space:nowrap;background:#1a1a38;border:1px solid var(--border);color:var(--text);font-size:10px;padding:4px 8px;border-radius:4px;z-index:10;pointer-events:none}
 
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -224,7 +224,8 @@ footer span{color:var(--gold)}
 <body>
 
 <div class="header">
-  <div style="text-align:right;margin-bottom:8px"><a href="index-dark.html" style="font-size:11px;color:var(--muted);text-decoration:none;border:1px solid var(--border);padding:3px 10px;border-radius:12px;">🌙 다크 모드</a></div><div class="badge">AI-POWERED M&A SCREENING · 캐주얼 게임</div>
+  <div style="text-align:right;margin-bottom:8px"><a href="index-light.html" style="font-size:11px;color:var(--muted);text-decoration:none;border:1px solid var(--border);padding:3px 10px;border-radius:12px;">☀️ 라이트 모드</a></div>
+  <div class="badge">AI-POWERED M&A SCREENING · 캐주얼 게임</div>
   <h1>캐주얼 게임 <span>인수 후보 스크리닝</span></h1>
   <p>리뷰 데이터 기반으로 광고 수익성과 인수 적합도를 동시에 평가합니다</p>
   <div class="meta">
@@ -286,7 +287,7 @@ footer span{color:var(--gold)}
           <div class="c-case">📌 Rovio → Ruby Games ($90M, 2021): 소규모 스튜디오 + 성과연동 조건부 지급으로 광고 수익 변동성 헤지</div>
         </div>
       </div>
-      <div style="margin-top:14px;padding:10px 14px;background:#eeeee9;border-radius:6px;font-size:11px;color:var(--muted);line-height:1.7;border-left:3px solid #bbbbcc">
+      <div style="margin-top:14px;padding:10px 14px;background:#0a0a14;border-radius:6px;font-size:11px;color:var(--muted);line-height:1.7;border-left:3px solid #333355">
         <b style="color:var(--text)">밸류에이션 벤치마크 (M&A 실거래 기반)</b> · 하이퍼캐주얼: 연매출 2~3x · 퍼즐/워드(에버그린): 4~6x · 포트폴리오 딜: 5~7x<br>
         <span style="color:#4466aa">⚠ 본 스코어는 공개 데이터(Google Play) + Claude AI 분석 기반 추정입니다. 실제 인수 전 별도 Due Diligence 필수.</span>
       </div>
@@ -3989,7 +3990,7 @@ function initDashboard() {
 
   // Chart.js global defaults
   Chart.defaults.color = '#8888aa';
-  Chart.defaults.borderColor = '#d0d0c8';
+  Chart.defaults.borderColor = '#2a2a45';
   Chart.defaults.font.family = "'Apple SD Gothic Neo','Noto Sans KR',sans-serif";
   Chart.defaults.font.size = 11;
 
@@ -4021,15 +4022,15 @@ function initDashboard() {
               return [`${d.name}`, `인수 적합도 ${d.y}점 | 광고 개선 여지 ${d.x}/30`];
             }
           },
-          backgroundColor: '#ffffff', borderColor: '#d0d0c8', borderWidth: 1, padding: 10,
+          backgroundColor: '#1a1a2e', borderColor: '#2a2a45', borderWidth: 1, padding: 10,
           titleColor: '#e8e8f0', bodyColor: '#8888aa',
         }
       },
       scales: {
-        x: {min:0, max:30, grid:{color:'#e0e0d8'},
-          title:{display:true, text:'← 광고 개선 여지 (30점 만점) →', color:'#60607a', font:{size:10}}},
-        y: {min:30, max:85, grid:{color:'#e0e0d8'},
-          title:{display:true, text:'인수 적합도 (100점)', color:'#60607a', font:{size:10}}}
+        x: {min:0, max:30, grid:{color:'#1e1e3a'},
+          title:{display:true, text:'← 광고 개선 여지 (30점 만점) →', color:'#8888aa', font:{size:10}}},
+        y: {min:30, max:85, grid:{color:'#1e1e3a'},
+          title:{display:true, text:'인수 적합도 (100점)', color:'#8888aa', font:{size:10}}}
       },
       onClick: (e, elements) => {
         if (elements.length) jumpToGame(sgames[elements[0].index].id);
@@ -4060,12 +4061,12 @@ function initDashboard() {
         legend: {display: false},
         tooltip: {
           callbacks: { label: ctx => ` 연 매출 약 ${ctx.raw}억원` },
-          backgroundColor: '#ffffff', borderColor: '#d0d0c8', borderWidth: 1, padding: 10,
+          backgroundColor: '#1a1a2e', borderColor: '#2a2a45', borderWidth: 1, padding: 10,
           bodyColor: '#e8e8f0',
         }
       },
       scales: {
-        x: {grid:{color:'#e0e0d8'}, ticks:{callback: v => `${v}억`}},
+        x: {grid:{color:'#1e1e3a'}, ticks:{callback: v => `${v}억`}},
         y: {grid:{display:false}, ticks:{font:{size:11}}}
       },
       onClick: (e, elements) => {
