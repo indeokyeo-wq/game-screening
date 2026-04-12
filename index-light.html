@@ -3831,6 +3831,7 @@ const GAMES = [
 let currentFilter = 'all';
 let currentSort = 'score';
 let openIds = new Set();
+let currentVerdictFilter = '';
 
 /* ── 달러 → 원화 (1 USD = 1,370원) ── */
 const USD_KRW = 1370;
@@ -3960,7 +3961,7 @@ function renderCard(g, rank) {
 function getSorted() {
   let list = GAMES.filter(g => g);
   if (currentFilter !== 'all') list = list.filter(g => g.genre === currentFilter);
-  if (typeof currentVerdictFilter !== 'undefined' && currentVerdictFilter) list = list.filter(g => g.verdict === currentVerdictFilter);
+  if (currentVerdictFilter) list = list.filter(g => g.verdict === currentVerdictFilter);
   if (currentSort === 'score') list.sort((a,b) => b.score - a.score);
   else list.sort((a,b) => a.name.localeCompare(b.name));
   return list;
@@ -3979,8 +3980,9 @@ function render() {
 }
 
 function switchTab(cardId, tabName, btn) {
-  event.stopPropagation();
+  if (event) event.stopPropagation();
   const card = document.getElementById('card-' + cardId);
+  if (!card) return;
   card.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   card.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   btn.classList.add('active');
@@ -3991,7 +3993,7 @@ function switchTab(cardId, tabName, btn) {
 function toggleDetail(id) {
   const el = document.getElementById(`detail-${id}`);
   const card = document.getElementById(`card-${id}`);
-  if (!el) return;
+  if (!el || !card) return;
   if (openIds.has(id)) {
     openIds.delete(id);
     el.classList.remove('open');
@@ -4009,18 +4011,20 @@ function sortCards(type) {
   document.querySelectorAll('.filter-btn').forEach(b => {
     if (b.textContent.includes('점수') || b.textContent.includes('이름')) b.classList.remove('active');
   });
-  event.target.classList.add('active');
+  const activeBtn = document.querySelector(`.filter-btn[onclick="sortCards('${type}')"]`);
+  if (activeBtn) activeBtn.classList.add('active');
   render();
 }
 
 const FILTER_LABELS = ['전체','한국 캐주얼','하이퍼캐주얼','러너','퍼즐/매치3','배틀/아케이드','소셜/시뮬','아이들/방치형','레이싱'];
 function filterCards(type) {
   currentFilter = type;
-  if (typeof currentVerdictFilter !== 'undefined') currentVerdictFilter = '';
+  currentVerdictFilter = '';
   document.querySelectorAll('.filter-btn').forEach(b => {
     if (FILTER_LABELS.includes(b.textContent.trim())) b.classList.remove('active');
   });
-  event.target.classList.add('active');
+  const activeBtn = document.querySelector(`.filter-btn[onclick="filterCards('${type}')"]`);
+  if (activeBtn) activeBtn.classList.add('active');
   render();
 }
 
@@ -4030,7 +4034,8 @@ function jumpToGame(id) {
   document.querySelectorAll('.filter-btn').forEach(b => {
     if (FILTER_LABELS.includes(b.textContent.trim())) b.classList.remove('active');
   });
-  document.querySelector('[onclick="filterCards(\'all\')"]').classList.add('active');
+  const allFilterBtn = document.querySelector('[onclick="filterCards(\'all\')"]');
+  if (allFilterBtn) allFilterBtn.classList.add('active');
   render();
   setTimeout(() => {
     if (!openIds.has(id)) toggleDetail(id);
@@ -4044,7 +4049,7 @@ function initDashboard() {
   const games = GAMES.filter(g => g);
   const passCount = games.filter(g => g.verdict === 'pass').length;
   const condCount = games.filter(g => g.verdict === 'cond').length;
-  const avgScore = Math.round(games.reduce((s,g) => s + g.score, 0) / games.length);
+  const avgScore = games.length > 0 ? Math.round(games.reduce((s,g) => s + g.score, 0) / games.length) : 0;
   const highAdCount = games.filter(g => g.adLevel === 'high').length;
 
   // KPI cards
@@ -4182,7 +4187,6 @@ function scrollToSection(id, btn) {
 }
 
 /* ── 판정 필터 ── */
-let currentVerdictFilter = '';
 function filterByVerdict(v) {
   currentVerdictFilter = v;
   render();
@@ -4231,7 +4235,9 @@ function renderComparePanel() {
   if (compareSet.size < 2) { panel.classList.remove('open'); return; }
   panel.classList.add('open');
   const gs = [...compareSet].map(id => GAMES.find(g => g && g.id === id)).filter(Boolean);
-  document.getElementById('compareBody').innerHTML = gs.map(g => {
+  const compareBody = document.getElementById('compareBody');
+  if (!compareBody) return;
+  compareBody.innerHTML = gs.map(g => {
     const f = g.finance || {};
     const adVal = g.bars && g.bars[1] ? g.bars[1][1]+'/30' : '-';
     const riskTitle = g.risks && g.risks[0] ? g.risks[0].replace(/<b>(.*?)<\/b>[\s\S]*/, '$1') : '-';
