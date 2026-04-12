@@ -3868,6 +3868,8 @@ let currentSort = 'score';
 let openIds = new Set();
 let currentVerdictFilter = '';
 let currentAdFilter = '';
+let _scatterChart = null;
+let _revenueChart = null;
 
 /* ── 달러 → 원화 (1 USD = 1,370원) ── */
 const USD_KRW = 1370;
@@ -3970,10 +3972,10 @@ function renderCard(g, rank) {
       <div class="fin-basis">📎 ${f.basis||''}</div>
     </div>
     <div class="tab-nav">
-      <button class="tab-btn active" onclick="switchTab('${g.id}','ip',this)">IP 규모</button>
-      <button class="tab-btn" onclick="switchTab('${g.id}','strength',this)">강점</button>
-      <button class="tab-btn" onclick="switchTab('${g.id}','risk',this)">리스크</button>
-      <button class="tab-btn" onclick="switchTab('${g.id}','ad',this)">광고 수익</button>
+      <button class="tab-btn active" onclick="switchTab(event,'${g.id}','ip',this)">IP 규모</button>
+      <button class="tab-btn" onclick="switchTab(event,'${g.id}','strength',this)">강점</button>
+      <button class="tab-btn" onclick="switchTab(event,'${g.id}','risk',this)">리스크</button>
+      <button class="tab-btn" onclick="switchTab(event,'${g.id}','ad',this)">광고 수익</button>
     </div>
     <div class="tab-panel active" data-tab="ip">
       <div class="tab-line">📊 추정 MAU <b>${g.mau||'-'}</b></div>
@@ -4016,8 +4018,8 @@ function render() {
   });
 }
 
-function switchTab(cardId, tabName, btn) {
-  if (event) event.stopPropagation();
+function switchTab(e, cardId, tabName, btn) {
+  if (e) e.stopPropagation();
   const card = document.getElementById('card-' + cardId);
   if (!card) return;
   card.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -4105,7 +4107,7 @@ function initDashboard() {
     <tr onclick="jumpToGame('${g.id}')">
       <td style="width:20px;color:var(--muted);font-weight:700;font-size:11px">${rank}</td>
       <td><div class="mini-game">
-        <img class="mini-icon" src="${g.icon}" loading="lazy">
+        <img class="mini-icon" src="${g.icon}" alt="${g.name}" loading="lazy">
         <div><div style="font-weight:700;font-size:12px">${g.name}</div><div style="font-size:10px;color:var(--muted)">${g.dev}</div></div>
       </div></td>
       <td style="text-align:right;white-space:nowrap">${metric}</td>
@@ -4130,7 +4132,8 @@ function initDashboard() {
 
   // ── Scatter: 포지셔닝 맵 ──
   const sgames = games.filter(g => g.bars && g.bars[1]);
-  new Chart(document.getElementById('scatterChart'), {
+  if (_scatterChart) _scatterChart.destroy();
+  _scatterChart = new Chart(document.getElementById('scatterChart'), {
     type: 'scatter',
     data: {
       datasets: [{
@@ -4175,7 +4178,8 @@ function initDashboard() {
     .sort((a,b) => parseRevUsd(b.finance.revYear) - parseRevUsd(a.finance.revYear))
     .slice(0, 10);
 
-  new Chart(document.getElementById('revenueChart'), {
+  if (_revenueChart) _revenueChart.destroy();
+  _revenueChart = new Chart(document.getElementById('revenueChart'), {
     type: 'bar',
     data: {
       labels: top10.map(g => g.name.length > 12 ? g.name.slice(0,12)+'…' : g.name),
@@ -4287,14 +4291,16 @@ function renderComparePanel() {
   if (!compareBody) return;
   compareBody.innerHTML = gs.map(g => {
     const f = g.finance || {};
-    const adVal = g.bars && g.bars[1] ? g.bars[1][1]+'/30' : '-';
+    const adVal = g.bars && g.bars[1] ? `${g.bars[1][1]}/30` : '-';
     const riskTitle = g.risks && g.risks[0] ? g.risks[0].replace(/<b>(.*?)<\/b>[\s\S]*/, '$1') : '-';
-    return '<tr><td class="compare-name">'+g.name+'</td>'
-      +'<td style="color:'+getColor(g.score)+';font-weight:700">'+g.score+'점</td>'
-      +'<td>'+(g.verdictLabel||'-')+'</td>'
-      +'<td>'+adVal+'</td>'
-      +'<td style="color:var(--gold)">'+(krw(f.revYear)||'-')+'</td>'
-      +'<td style="font-size:10px;color:var(--muted)">'+riskTitle+'</td></tr>';
+    return `<tr>
+      <td class="compare-name">${g.name}</td>
+      <td style="color:${getColor(g.score)};font-weight:700">${g.score}점</td>
+      <td>${g.verdictLabel || '-'}</td>
+      <td>${adVal}</td>
+      <td style="color:var(--gold)">${krw(f.revYear) || '-'}</td>
+      <td style="font-size:10px;color:var(--muted)">${riskTitle}</td>
+    </tr>`;
   }).join('');
 }
 
