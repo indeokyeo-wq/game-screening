@@ -3805,23 +3805,23 @@ function renderCard(g, rank) {
   <div class="verdict v-${g.verdict}">${g.verdictLabel}</div>
   <div class="mau">추정 MAU <b>${g.mau}</b></div>
   <div class="bars">${barsHtml}</div>
-</div>
-<div class="detail" id="detail-${g.id}">
-  <div class="fin-block">
-    <h4>💰 재무 추정 — 공개 데이터 + 업계 벤치마크 기반</h4>
-    <div class="fin-company">🏢 ${f.headnote||''}</div>
-    <div class="fin-grid">
-      <div class="fin-item"><div class="fin-item-lbl">개발사 인원</div><div class="fin-item-val">${f.headcount||''}</div></div>
-      <div class="fin-item"><div class="fin-item-lbl">MAU 기준</div><div class="fin-item-val">${f.mauBase||''}</div><div class="fin-item-sub">${f.arpmauNote||''}</div></div>
-      <div class="fin-item"><div class="fin-item-lbl">ARPMAU</div><div class="fin-item-val blue">${krw(f.arpmau)||''}</div></div>
-      <div class="fin-item"><div class="fin-item-lbl">월 추정 매출</div><div class="fin-item-val blue">${krw(f.revMonth)||''}</div></div>
-      <div class="fin-item"><div class="fin-item-lbl">연 추정 매출</div><div class="fin-item-val gold">${krw(f.revYear)||''}</div></div>
-      <div class="fin-item"><div class="fin-item-lbl">연 추정 영업이익</div><div class="fin-item-val" style="color:${opClr}">${krw(f.opProfitYear)||''}</div><div class="fin-item-sub">${f.opMargin||''}</div></div>
+  <div class="detail" id="detail-${g.id}">
+    <div class="fin-block">
+      <h4>💰 재무 추정 — 공개 데이터 + 업계 벤치마크 기반</h4>
+      <div class="fin-company">🏢 ${f.headnote||''}</div>
+      <div class="fin-grid">
+        <div class="fin-item"><div class="fin-item-lbl">개발사 인원</div><div class="fin-item-val">${f.headcount||''}</div></div>
+        <div class="fin-item"><div class="fin-item-lbl">MAU 기준</div><div class="fin-item-val">${f.mauBase||''}</div><div class="fin-item-sub">${f.arpmauNote||''}</div></div>
+        <div class="fin-item"><div class="fin-item-lbl">ARPMAU</div><div class="fin-item-val blue">${krw(f.arpmau)||''}</div></div>
+        <div class="fin-item"><div class="fin-item-lbl">월 추정 매출</div><div class="fin-item-val blue">${krw(f.revMonth)||''}</div></div>
+        <div class="fin-item"><div class="fin-item-lbl">연 추정 매출</div><div class="fin-item-val gold">${krw(f.revYear)||''}</div></div>
+        <div class="fin-item"><div class="fin-item-lbl">연 추정 영업이익</div><div class="fin-item-val" style="color:${opClr}">${krw(f.opProfitYear)||''}</div><div class="fin-item-sub">${f.opMargin||''}</div></div>
+      </div>
+      <div class="fin-basis">📌 비용: ${krw(f.costNote)||''}<br>📎 근거: ${f.basis||''}</div>
     </div>
-    <div class="fin-basis">📌 비용: ${krw(f.costNote)||''}<br>📎 근거: ${f.basis||''}</div>
+    <div class="comment-block">${commentHtml}</div>
+    <div class="close-row" onclick="event.stopPropagation();toggleDetail('${g.id}')">▲ 닫기</div>
   </div>
-  <div class="comment-block">${commentHtml}</div>
-  <div class="close-row" onclick="event.stopPropagation();toggleDetail('${g.id}')">▲ 닫기</div>
 </div>`;
 }
 
