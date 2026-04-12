@@ -218,6 +218,71 @@ footer span{color:var(--gold)}
 .bar-lbl{position:relative}
 .bar-lbl[title]:hover::after{content:attr(title);position:absolute;left:0;bottom:110%;white-space:nowrap;background:#1a1a38;border:1px solid var(--border);color:var(--text);font-size:10px;padding:4px 8px;border-radius:4px;z-index:10;pointer-events:none}
 
+
+/* ── CTA 섹션 ── */
+.cta-section{max-width:860px;margin:28px auto 0;padding:0 24px}
+.cta-box{background:linear-gradient(135deg,var(--card) 0%,var(--card2) 100%);border:1px solid var(--gold);border-radius:14px;padding:22px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.cta-box-left h3{font-size:16px;font-weight:800;margin-bottom:5px}
+.cta-box-left p{font-size:12px;color:var(--muted);line-height:1.6}
+.cta-box-right{display:flex;gap:8px;flex-wrap:wrap}
+.cta-action-btn{font-size:11px;font-weight:700;padding:9px 16px;border-radius:8px;cursor:pointer;transition:all .2s;border:1px solid var(--border);background:transparent;color:var(--text);text-decoration:none;display:inline-block;white-space:nowrap}
+.cta-action-btn:hover{border-color:var(--gold);color:var(--gold)}
+.cta-action-btn.primary{background:var(--gold);color:#000;border-color:var(--gold)}
+.cta-action-btn.primary:hover{opacity:.9}
+
+/* ── 비교 기능 ── */
+.card-cmp-row{margin-top:10px}
+.card-cmp-btn{font-size:10px;font-weight:700;padding:3px 10px;border-radius:12px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s}
+.card-cmp-btn:hover{border-color:var(--blue);color:var(--blue)}
+.card-cmp-btn.selected{background:var(--gold);border-color:var(--gold);color:#000}
+.card.comparing{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold-dim)}
+.compare-panel{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:2px solid var(--gold);z-index:200;padding:14px 24px 18px;box-shadow:0 -6px 24px rgba(0,0,0,.4)}
+.compare-panel.open{display:block}
+.compare-panel-inner{max-width:860px;margin:0 auto}
+.compare-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.compare-title{font-size:12px;font-weight:800;color:var(--gold)}
+.compare-clear{font-size:10px;color:var(--muted);cursor:pointer;background:none;border:1px solid var(--border);padding:3px 10px;border-radius:10px;transition:all .15s}
+.compare-clear:hover{border-color:var(--red);color:var(--red)}
+.compare-table{width:100%;border-collapse:collapse;font-size:11px}
+.compare-table th{text-align:left;color:var(--muted);font-size:9px;letter-spacing:.5px;text-transform:uppercase;padding:4px 8px;border-bottom:1px solid var(--border);white-space:nowrap}
+.compare-table td{padding:6px 8px;border-bottom:1px solid var(--border);vertical-align:top}
+.compare-table tr:last-child td{border-bottom:none}
+.compare-name{font-weight:700;color:var(--text);font-size:12px}
+
+/* ── 카드 핵심 지표 ── */
+.card-metrics{display:flex;gap:14px;margin-bottom:10px;flex-wrap:wrap}
+.card-metric{font-size:11px;color:var(--muted)}
+.card-metric b{color:var(--text)}
+.card-metric.rev b{color:var(--gold)}
+
+/* ── 세부 평가 기준 ── */
+.c-sub-toggle{font-size:10px;color:var(--blue);cursor:pointer;margin-top:6px;display:inline-block;user-select:none}
+.c-sub-toggle:hover{text-decoration:underline}
+.c-sub{display:none;margin-top:8px;padding:8px 10px;background:var(--bg);border-radius:6px;border-left:2px solid var(--border)}
+.c-sub.open{display:block}
+.c-sub-item{font-size:10px;color:var(--muted);line-height:1.7}
+.c-sub-item b{color:var(--text)}
+
+/* ── Methodology ── */
+.methodology{max-width:860px;margin:32px auto 0;padding:0 24px 40px}
+.method-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px 22px}
+.method-hd{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:14px}
+.method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:12px}
+.method-item-title{font-size:11px;font-weight:700;color:var(--text);margin-bottom:4px}
+.method-item-text{font-size:10px;color:var(--muted);line-height:1.7}
+.method-item-text a{color:var(--blue);text-decoration:none}
+.method-item-text a:hover{text-decoration:underline}
+.method-disclaimer{font-size:10px;color:var(--muted);border-top:1px solid var(--border);padding-top:10px;line-height:1.6}
+
+/* ── Mobile ── */
+@media(max-width:640px){
+  .charts-row{grid-template-columns:1fr}
+  .ranks-row{grid-template-columns:1fr}
+  .cta-box{flex-direction:column}
+  .cta-box-right{justify-content:center}
+  .method-grid{grid-template-columns:1fr}
+  .compare-table th:nth-child(n+5),.compare-table td:nth-child(n+5){display:none}
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
@@ -250,7 +315,7 @@ footer span{color:var(--gold)}
 </div>
 
 <!-- 평가 기준 아코디언 -->
-<div class="criteria-wrap">
+<div class="criteria-wrap" id="criteriaWrap">
   <div class="criteria-box">
     <div class="criteria-hd" onclick="toggleCriteria()">
       <div class="criteria-hd-left">
@@ -295,6 +360,22 @@ footer span{color:var(--gold)}
   </div>
 </div>
 
+
+<!-- CTA 섹션 -->
+<div class="cta-section">
+  <div class="cta-box">
+    <div class="cta-box-left">
+      <h3>🎯 후보 발굴부터 <span style="color:var(--gold)">딜 클로징</span>까지</h3>
+      <p>스코어링 로직 · 개별 상세 리포트 · 맞춤 비교 분석이 필요하시면 문의해 주세요.</p>
+    </div>
+    <div class="cta-box-right">
+      <a href="mailto:indeokyeo@gmail.com?subject=게임 스크리닝 상세 리포트 요청" class="cta-action-btn">📄 상세 리포트 요청</a>
+      <a href="#criteriaWrap" class="cta-action-btn" onclick="event.preventDefault();document.getElementById('criteriaWrap').scrollIntoView({behavior:'smooth'});if(!document.getElementById('criteriaBody').classList.contains('open'))toggleCriteria()">🔍 스코어링 로직</a>
+      <a href="mailto:indeokyeo@gmail.com?subject=게임 M&amp;A 데모 문의" class="cta-action-btn primary">💬 데모 문의</a>
+    </div>
+  </div>
+</div>
+
 <!-- 스티키 섹션 내비게이션 -->
 <nav class="sticky-nav">
   <div class="sticky-nav-inner">
@@ -317,7 +398,7 @@ footer span{color:var(--gold)}
   <div class="charts-row">
     <div class="chart-box">
       <div class="chart-hd" id="positioning">포지셔닝 맵 <span class="chart-hd-note">클릭 → 게임 상세</span></div>
-      <div class="chart-desc">오른쪽 위에 위치할수록 <b>광고 개선 여지가 크고</b> 종합 인수 적합도가 높은 후보입니다. 🟢 인수 추천 · 🟡 조건부 검토 · 🔴 인수 보류</div>
+      <div class="chart-desc">오른쪽 위 = <b>광고 수익화 여지 크고 인수 매력도 높음</b>. 왼쪽 아래로 갈수록 현재 광고가 포화되었거나 인수 효용이 낮습니다. 🟢 인수 추천 · 🟡 조건부 검토 · 🔴 인수 보류</div>
       <div class="chart-wrap"><canvas id="scatterChart"></canvas></div>
     </div>
     <div class="chart-box">
@@ -364,6 +445,28 @@ footer span{color:var(--gold)}
 
 <div class="section" id="candidates">
   <div class="grid" id="gameGrid"></div>
+</div>
+
+
+<div class="methodology">
+  <div class="method-box">
+    <div class="method-hd">Methodology &amp; Data Sources</div>
+    <div class="method-grid">
+      <div>
+        <div class="method-item-title">데이터 수집</div>
+        <div class="method-item-text">Google Play 공개 API (<a href="https://github.com/facundoolano/google-play-scraper" target="_blank">google-play-scraper</a>) — 설치수·별점·리뷰 150개/앱. 2026년 4월 기준.</div>
+      </div>
+      <div>
+        <div class="method-item-title">ARPMAU 벤치마크</div>
+        <div class="method-item-text"><a href="https://sensortower.com" target="_blank">Sensor Tower</a> 2023 캐주얼 장르 · <a href="https://appmagic.rocks" target="_blank">AppMagic</a> 2023 하이퍼캐주얼 역산 · AppLovin MAX 공개 eCPM 가이드</div>
+      </div>
+      <div>
+        <div class="method-item-title">M&amp;A 벤치마크</div>
+        <div class="method-item-text">Zynga→Rollic $180M (2020) · Tripledot→AppLovin $800M (2025) · Miniclip→Easybrain $1.2B (2024) · Rovio→Ruby Games $90M (2021)</div>
+      </div>
+    </div>
+    <div class="method-disclaimer">⚠ 본 스코어는 Claude AI + 공개 데이터 기반 추정치입니다. 실제 인수 전 독립적 Due Diligence 필수. 재무 수치는 업계 벤치마크 기반이며 실제와 다를 수 있습니다.</div>
+  </div>
 </div>
 
 <footer>
@@ -4112,9 +4215,69 @@ function updateFilterCount() {
 }
 
 
+/* ── 비교 기능 ── */
+let compareSet = new Set();
+function toggleCompare(id, btn) {
+  if (compareSet.has(id)) {
+    compareSet.delete(id);
+    btn.classList.remove('selected');
+    document.getElementById('card-'+id)?.classList.remove('comparing');
+  } else {
+    if (compareSet.size >= 3) { alert('최대 3개까지 비교할 수 있습니다.'); return; }
+    compareSet.add(id);
+    btn.classList.add('selected');
+    document.getElementById('card-'+id)?.classList.add('comparing');
+  }
+  renderComparePanel();
+}
+function clearCompare() {
+  compareSet.forEach(id => {
+    document.getElementById('cmp-'+id)?.classList.remove('selected');
+    document.getElementById('card-'+id)?.classList.remove('comparing');
+  });
+  compareSet.clear();
+  renderComparePanel();
+}
+function renderComparePanel() {
+  const panel = document.getElementById('comparePanel');
+  const countEl = document.getElementById('compareCount');
+  if (countEl) countEl.textContent = compareSet.size;
+  if (!panel) return;
+  if (compareSet.size < 2) { panel.classList.remove('open'); return; }
+  panel.classList.add('open');
+  const gs = [...compareSet].map(id => GAMES.find(g => g && g.id === id)).filter(Boolean);
+  document.getElementById('compareBody').innerHTML = gs.map(g => {
+    const f = g.finance || {};
+    const adVal = g.bars && g.bars[1] ? g.bars[1][1]+'/30' : '-';
+    const riskTitle = g.risks && g.risks[0] ? g.risks[0].replace(/<b>(.*?)<\/b>[\s\S]*/, '$1') : '-';
+    return '<tr><td class="compare-name">'+g.name+'</td>'
+      +'<td style="color:'+getColor(g.score)+';font-weight:700">'+g.score+'점</td>'
+      +'<td>'+(g.verdictLabel||'-')+'</td>'
+      +'<td>'+adVal+'</td>'
+      +'<td style="color:var(--gold)">'+(krw(f.revYear)||'-')+'</td>'
+      +'<td style="font-size:10px;color:var(--muted)">'+riskTitle+'</td></tr>';
+  }).join('');
+}
+
 render();
 initDashboard();
 updateFilterCount();
 </script>
+
+<div class="compare-panel" id="comparePanel">
+  <div class="compare-panel-inner">
+    <div class="compare-hd">
+      <span class="compare-title">📊 비교 분석 — <span id="compareCount">0</span>개 선택</span>
+      <button class="compare-clear" onclick="clearCompare()">✕ 초기화</button>
+    </div>
+    <table class="compare-table">
+      <thead><tr>
+        <th>게임</th><th>총점</th><th>판정</th><th>광고 개선</th><th>연 매출</th><th>주요 리스크</th>
+      </tr></thead>
+      <tbody id="compareBody"></tbody>
+    </table>
+  </div>
+</div>
+
 </body>
 </html>
