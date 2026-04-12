@@ -3794,6 +3794,23 @@ function renderCard(g, rank) {
   const opColorMap = {green:'var(--green)',yellow:'var(--yellow)',gold:'var(--gold)',red:'var(--red)'};
   const opClr = opColorMap[f.opColor] || 'var(--text)';
   const commentHtml = makeComment(g).map(l => `<div class="comment-line">${l}</div>`).join('');
+  // 탭 텍스트: <b>헤드라인</b> — 첫 구절만 표시 (칸 넘침 방지)
+  const fmtLine = (s) => {
+    if (!s) return '';
+    const m = s.match(/<b>(.*?)<\/b>(.*)/);
+    if (m) {
+      const rest = m[2].replace(/^\s*[—\-]\s*/, '').trim();
+      const cutIdx = rest.search(/[,，.。]/);
+      const cut = (cutIdx >= 0 && cutIdx <= 55) ? rest.slice(0, cutIdx) : rest.slice(0, 55);
+      return cut.trim() ? `<b>${m[1]}</b> — ${cut.trim()}` : `<b>${m[1]}</b>`;
+    }
+    return s.slice(0, 65);
+  };
+  const fmtPayment = (s) => {
+    if (!s) return '';
+    const dotIdx = s.search(/[.。]/);
+    return (dotIdx >= 0 && dotIdx <= 60) ? s.slice(0, dotIdx + 1) : s.slice(0, 60);
+  };
   return `
 <div class="card" id="card-${g.id}" data-genre="${g.genre}" onclick="toggleDetail('${g.id}')">
   <span class="card-rank">#${rank}</span>
@@ -3837,14 +3854,14 @@ function renderCard(g, rank) {
       <div class="tab-line">💬 ${g.summary||'-'}</div>
     </div>
     <div class="tab-panel" data-tab="strength">
-      ${(g.strengths||[]).map(s=>`<div class="tab-line">💪 ${s}</div>`).join('')}
+      ${(g.strengths||[]).map(s=>`<div class="tab-line">💪 ${fmtLine(s)}</div>`).join('')}
     </div>
     <div class="tab-panel" data-tab="risk">
-      ${(g.risks||[]).map(r=>`<div class="tab-line">⚠️ ${r}</div>`).join('')}
+      ${(g.risks||[]).map(r=>`<div class="tab-line">⚠️ ${fmtLine(r)}</div>`).join('')}
     </div>
     <div class="tab-panel" data-tab="ad">
       <div class="tab-line">📡 ${g.adLabel||'-'}</div>
-      ${g.payment?`<div class="tab-line">${g.payment}</div>`:''}
+      ${g.payment?`<div class="tab-line">${fmtPayment(g.payment)}</div>`:''}
     </div>
     <div class="close-row" onclick="event.stopPropagation();toggleDetail('${g.id}')">▲ 닫기</div>
   </div>
